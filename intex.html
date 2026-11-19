@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee Passengers | Take-Away Coffee Baku</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Üst Menyu (Navbar) -->
+  <header class="navbar">
+    <div class="logo">☕ Coffee <span>Passengers</span></div>
+    <nav class="nav-links">
+      <a href="#menu">Menyu</a>
+      <a href="#builder">Öz Kofeni Yarat</a>
+      <a href="#location">Ünvan</a>
+    </nav>
+    <button class="cart-btn" id="openCartBtn">
+      🛒 Səbət (<span id="cartCount">0</span>)
+    </button>
+  </header>
+
+  <!-- Hero Bölməsi -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">📍 103 Mir Cəlal küç., Bakı</span>
+      <h1>Yolüstü Ən Dadlı Dayanacağın</h1>
+      <p>Təzə qovrulmuş dənələrdən hazırlanan isti və soyuq kofelər — gözləmədən, birbaşa götür və yoluna davam et.</p>
+      <div class="hero-buttons">
+        <a href="#menu" class="btn-primary">Menyuya Bax</a>
+        <a href="#builder" class="btn-secondary">Öz Kofeni Yığ ✨</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="coffee-emoji">🥤</div>
+      <h3>Günün Seçimi</h3>
+      <p>Caramel Iced Latte + Şokoladlı Kruassan</p>
+      <span class="price-tag">7.50 ₼</span>
+      <button class="btn-primary small-btn" onclick="addToCart('Günün Seçimi: Caramel Latte + Kruassan', 7.50)">Səbətə At</button>
+    </div>
+  </section>
+
+  <!-- Menyu Bölməsi -->
+  <section id="menu" class="section">
+    <h2 class="section-title">Menyumuz</h2>
+    <p class="section-subtitle">Kateqoriya seç və istədiyin içkini səbətə əlavə et</p>
+
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-category="all">Hamısı</button>
+      <button class="filter-btn" data-category="hot">🔥 İsti Kofelər</button>
+      <button class="filter-btn" data-category="cold">🧊 Soyuq Kofelər</button>
+      <button class="filter-btn" data-category="dessert">🥐 Şirniyyat</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- JavaScript ilə avtomatik dolacaq -->
+    </div>
+  </section>
+
+  <!-- Maraqlı Hissə: Öz Kofeni Yarat -->
+  <section id="builder" class="section builder-section">
+    <h2 class="section-title">✨ Öz Kofeni Yarat</h2>
+    <p class="section-subtitle">Ölçünü, südü və şərbəti seç — qiymət canlı hesablansın</p>
+
+    <div class="builder-box">
+      <div class="builder-controls">
+        <div class="control-group">
+          <label>1. Əsas Kofe:</label>
+          <select id="baseCoffee">
+            <option value="3.50" data-name="Americano">Americano (3.50 ₼)</option>
+            <option value="4.50" data-name="Latte" selected>Latte (4.50 ₼)</option>
+            <option value="4.50" data-name="Cappuccino">Cappuccino (4.50 ₼)</option>
+            <option value="5.00" data-name="Raf Coffee">Raf Coffee (5.00 ₼)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label>2. Ölçü seç:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="size" value="0" checked /> S (Standart)</label>
+            <label><input type="radio" name="size" value="1.00" /> M (+1.00 ₼)</label>
+            <label><input type="radio" name="size" value="1.80" /> L (+1.80 ₼)</label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>3. Süd növü:</label>
+          <select id="milkType">
+            <option value="0" data-name="Adi süd">Adi süd (Pulsuz)</option>
+            <option value="1.20" data-name="Badam südü">Badam südü (+1.20 ₼)</option>
+            <option value="1.20" data-name="Kokos südü">Kokos südü (+1.20 ₼)</option>
+            <option value="1.00" data-name="Laktozasız süd">Laktozasız süd (+1.00 ₼)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label>4. Əlavə şərbət:</label>
+          <select id="syrupType">
+            <option value="0" data-name="Şərbətsiz">Şərbətsiz</option>
+            <option value="0.80" data-name="Karamel şərbəti">Karamel (+0.80 ₼)</option>
+            <option value="0.80" data-name="Vanil şərbəti">Vanil (+0.80 ₼)</option>
+            <option value="0.80" data-name="Fındıq şərbəti">Fındıq (+0.80 ₼)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="builder-preview">
+        <div class="cup-visual" id="cupVisual">☕</div>
+        <h3 id="customTitle">Latte (S)</h3>
+        <p id="customDesc">Adi süd • Şərbətsiz</p>
+        <div class="custom-price" id="customPrice">4.50 ₼</div>
+        <button class="btn-primary" id="addCustomBtn">Bu Kofeni Səbətə At</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ünvan və İş Saatları -->
+  <section id="location" class="section location-section">
+    <h2 class="section-title">Bizi Harada Tapmaq Olar?</h2>
+    <div class="location-cards">
+      <div class="info-card">
+        <h3>📍 Ünvan</h3>
+        <p>103 Mir Cəlal küçəsi (Millenium ş.s. qarşısı), Bakı</p>
+      </div>
+      <div class="info-card">
+        <h3>⏰ İş Saatları</h3>
+        <p>B.e – Şənbə: 10:00 – 01:00<br>Bazar: 11:00 – 01:00</p>
+      </div>
+      <div class="info-card">
+        <h3>⚡ Take-Away</h3>
+        <p>Sifarişin orta hazırlanma vaxtı: 4–6 dəqiqə</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Coffee Passengers Baku • Bütün hüquqlar qorunur</p>
+  </footer>
+
+  <!-- Səbət Modal Pəncərəsi -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>🛒 Sənin Səbətin</h3>
+        <button class="close-btn" id="closeCartBtn">✖</button>
+      </div>
+
+      <div class="cart-items" id="cartItems">
+        <p class="empty-msg">Səbətin hələ boşdur.</p>
+      </div>
+
+      <div class="cart-footer">
+        <div class="total-row">
+          <span>Ümumi məbləğ:</span>
+          <strong id="totalPrice">0.00 ₼</strong>
+        </div>
+
+        <input type="text" id="customerName" placeholder="Adınız (məs: Rəhim)" />
+        <input type="text" id="pickupTime" placeholder="Neçə dəqiqəyə götürəcəksiniz? (məs: 10 dəq)" />
+        <button class="btn-primary full-btn" id="checkoutBtn">Sifarişi Təsdiqlə</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bildiriş (Toast) -->
+  <div class="toast" id="toast">Məhsul səbətə əlavə olundu!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
